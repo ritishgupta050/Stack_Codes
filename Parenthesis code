@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string isvalid(string s)
+{
+    stack<char> st;
+
+    for(int i=0;i<s.size();i++)
+    {
+        if(s[i] == '[' || s[i] == '{' || s[i] == '(')
+        {
+            st.push(s[i]);
+        }
+        else if(s[i] == '}')
+        {
+            if(!st.empty() && st.top() == '{')
+            {
+                st.pop();
+            }
+            else
+            {
+                return "No";
+                break;
+            }
+        }
+        else if(s[i] == ']')
+        {
+            if(!st.empty() && st.top() == '[')
+            {
+                st.pop();
+            }
+            else
+            {
+                return "No";
+                break;
+            }
+        }
+        else if(s[i] == ')')
+        {
+            if(!st.empty() && st.top() == '(')
+            {
+                st.pop();
+            }
+            else
+            {
+                return "No";
+                break;
+            }
+        }
+    }
+    if(st.empty())
+        return "Yes";
+    else
+        return "No";
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+
+    while(t--)
+    {
+        string str;
+        cin>>str;
+
+        string res = isvalid(str);
+        cout<<res;
+    }
+return 0;
+}
